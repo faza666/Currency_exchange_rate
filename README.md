@@ -11,7 +11,7 @@ This script goes to https://raiffeisen.ua/currency and checks USD and EUR curren
 
 Received data will be written in .csv file (global variable '**destination_file**').
 
-### It put there:
+### It puts there:
   - current date,
   - official **EUR** and **USD** rate according to **National Bank of Ukraine**,
   - current exchange rate **EUR** to UAH according to **Raiffeisen Bank in Ukraine** both buy and cell,
