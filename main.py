@@ -1,17 +1,15 @@
-#!/home/dmytro/PycharmProjects/Currency_exchange_rate/venv/bin/python3
-
-
-import os
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from os.path import exists
 import csv
+import os
 from datetime import date
 
 
 url_reiff = 'https://raiffeisen.ua/currency'
+destination_file = '/home/dmytro/Desktop/currencies.csv'
 
 
 def get_page(url):
@@ -116,7 +114,7 @@ def send_message():
 def main():
     page = get_page(url_reiff)
     currencies = get_currency_rate(page)
-    write_data('/home/dmytro/Desktop/currencies.csv', currencies)
+    write_data(destination_file, currencies)
     send_message()
 
 
