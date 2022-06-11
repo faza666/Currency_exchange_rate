@@ -1,10 +1,13 @@
+#!/home/dmytro/PycharmProjects/Currency_exchange_rate/venv/bin/python3
+
+
+import os
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from os.path import exists
 import csv
-import os
 from datetime import date
 
 
@@ -52,16 +55,18 @@ def get_currency_rate(html_file):
     nbu_list = soup.find('div', class_='exchange-rate-wide-body__main').find_all('div', class_='value-rate-block__data')
     euro_nbu = nbu_list[0].text.strip()
     usd_nbu = nbu_list[1].text.strip()
-    currency_list.append(euro_nbu)          # euro_nbu
-    currency_list.append(usd_nbu)           # euro_nbu, usd_nbu
+    currency_list.append(euro_nbu)          # dd.mm.YYYY, euro_nbu
+    currency_list.append(usd_nbu)           # dd.mm.YYYY, euro_nbu, usd_nbu
 
     currency_block_list = soup.find('div', class_='bank-rate-body__body-main-block')\
         .find_all('div', class_='value-rate-block__data')
 
     for each in currency_block_list:
-        currency_list.append(each.text.strip())     # euro_nbu, usd_nbu, euro_buy, euro_cell, usd_buy, uds_cell, pln_buy, pln_cell
+        currency_list.append(each.text.strip())
+    # dd.mm.YYYY, euro_nbu, usd_nbu, euro_buy, euro_cell, usd_buy, uds_cell, pln_buy, pln_cell
 
-    del currency_list[-2:]                          # euro_nbu, usd_nbu, euro_buy, euro_cell, usd_buy, uds_cell
+    del currency_list[-2:]
+    # dd.mm.YYYY, euro_nbu, usd_nbu, euro_buy, euro_cell, usd_buy, uds_cell
 
     cross_exchange_rate_block_list = soup.find_all('div', class_='col-md-6 exchange-rate-kros-info__col')
 
@@ -87,10 +92,14 @@ def write_data(csv_file, currency_list):
                     'Дата',
                     'EUR НБУ',
                     'USD НБУ',
-                    'EUR Покупка',
-                    'EUR Продаж',
-                    'USD Покупка',
-                    'USD Продаж',
+                    'EUR Покупка в касі',
+                    'EUR Продаж в касі',
+                    'EUR Покупка online',
+                    'EUR Продаж online',
+                    'USD Покупка в касі',
+                    'USD Продаж в касі',
+                    'USD Покупка online',
+                    'USD Продаж online',
                     'USD/EUR',
                     'EUR/USD'
                 )
