@@ -2,6 +2,8 @@
 This script goes to https://raiffeisen.ua/currency and checks USD and EUR currency rate relating to UAH.
 
 ### To run this script you need to:
+  - Install python interpreter version 3.10+ from:
+    * https://www.python.org/;
   - Create virtual environment with **cli command**:
     * **python3 -m venv venv**;
   - Activate the virtual environment with:
